@@ -1,7 +1,3 @@
-const AIRTABLE_API_KEY = 'patTrS6EsC7wg74ru.23f3fc08410a604b01899fd6c307eabc1f8f31d9904745b39310e027aba01602';
-const AIRTABLE_BASE_ID = 'appRAj1hsc7MrGnZA/tblcbLa0kx51ZpO2H';
-const AIRTABLE_TABLE_NAME = 'Poser Signups';
-
 addEventListener('fetch', event => {
   event.respondWith(handleRequest(event.request))
 });
@@ -33,8 +29,8 @@ async function handleRequest(request) {
         body: JSON.stringify({
           records: [{
             fields: {
-              Email: email,
-              'Sign Up Date': new Date().toISOString()
+              'Email': email,
+              'Sign Up Date': new Date().toISOString().split('T')[0] // Formats as YYYY-MM-DD
             }
           }]
         })
