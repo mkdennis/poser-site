@@ -5,17 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Static HTML Website</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Static HTML Website</h1>
-    </header>
+        <img id="main-logo" src="images/Poser Logo.png" alt="Main Logo">
     <main>
-        <p>This is a simple static penis website. You can add more content here.</p>
-        <h1>Did this git commit work?</h1>
+        <div class="form-container">
+            <form name="contact" method="POST" data-netlify="true">
+           
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Enter email to signup">
+                </div>
+                
+                
+                <button type="submit">Sign Up for Waitlist</button>
+            </form>
+
+            <div id="success" class="success-message">
+                You're signed up! Check email for details.
+            </div>
+            <div id="error" class="error-message">
+                Sorry, there was a problem submitting your form. Please try again.
+            </div>
+        </div>
     </main>
     <footer>
-        <p>&copy; 2023 My Static HTML Website</p>
+        <p>POSER © 2024</p>
+        <p>Contact Us</p>
     </footer>
+
+    <script>
+        const form = document.querySelector('form');
+        const successMessage = document.getElementById('success');
+        const errorMessage = document.getElementById('error');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch('/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(formData).toString()
+                });
+                
+                if (response.ok) {
+                    form.reset();
+                    form.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    errorMessage.style.display = 'none';
+                } else {
+                    errorMessage.style.display = 'block';
+                    successMessage.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html> 
