@@ -35,6 +35,7 @@
         <p>Contact Us</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
         const form = document.querySelector('form');
         const successMessage = document.getElementById('success');
@@ -60,6 +61,33 @@
                     form.style.display = 'none';
                     successMessage.style.display = 'block';
                     errorMessage.style.display = 'none';
+                    
+                    document.getElementById('yaySound').play();
+                    
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        colors: ['#003BAD', '#FFFFFF'],
+                        origin: { y: 0.6 }
+                    });
+
+                    setTimeout(() => {
+                        confetti({
+                            particleCount: 50,
+                            spread: 70,
+                            colors: ['#003BAD', '#FFFFFF'],
+                            origin: { y: 0.6 }
+                        });
+                    }, 250);
+
+                    setTimeout(() => {
+                        confetti({
+                            particleCount: 30,
+                            spread: 70,
+                            colors: ['#003BAD', '#FFFFFF'],
+                            origin: { y: 0.6 }
+                        });
+                    }, 500);
                 } else {
                     throw new Error('Form submission failed');
                 }
@@ -70,5 +98,7 @@
             }
         });
     </script>
+
+    <audio id="yaySound" src="https://www.myinstants.com/media/sounds/children-yay-sound-effect.mp3" preload="auto"></audio>
 </body>
 </html> 
